@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mencore Admin</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: black;
+      color: white;
+      padding: 20px;
+    }
+
+    h1 {
+      color: gold;
+      text-align: center;
+    }
+
+    .msg {
+      background: #111;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border-left: 5px solid gold;
+    }
+
+    .name {
+      color: skyblue;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Mencore Admin Panel 🔐</h1>
+
+<div id="messages"></div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyByqrWIVXVe4JnW0h1l_UzJzJQYlDXUU4I",
+    authDomain: "mencore.firebaseapp.com",
+    projectId: "mencore",
+    storageBucket: "mencore.firebasestorage.app",
+    messagingSenderId: "223090622351",
+    appId: "1:223090622351:web:7ca7a578599344c265d5fa"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  async function loadMessages() {
+    const querySnapshot = await getDocs(collection(db, "messages"));
+    const container = document.getElementById("messages");
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+
+      container.innerHTML += `
+        <div class="msg">
+          <div class="name">${data.name}</div>
+          <div>${data.message}</div>
+        </div>
+      `;
+    });
+  }
+
+  loadMessages();
+</script>
+
+</body>
+</html>
