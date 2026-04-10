@@ -10,15 +10,11 @@
       padding: 50px;
     }
 
-    h1 {
-      color: #333;
-    }
-
     textarea {
       width: 80%;
       height: 100px;
-      padding: 10px;
       border-radius: 10px;
+      padding: 10px;
       border: none;
     }
 
@@ -39,7 +35,6 @@
 <p>Powered by MENMEX</p>
 
 <textarea id="message" placeholder="Send anonymous message..."></textarea><br>
-
 <button onclick="sendMessage()">Send</button>
 
 <script type="module">
@@ -58,10 +53,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// USER ID FROM LINK
+// 👇 GET USER ID FROM LINK
 const params = new URLSearchParams(window.location.search);
 const userId = params.get("id") || "menmex";
 
+// 👇 SEND MESSAGE
 window.sendMessage = async function () {
   const message = document.getElementById("message").value;
 
