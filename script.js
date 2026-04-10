@@ -1,31 +1,32 @@
 const quotes = [
-"Growth begins the moment you stop waiting for perfect conditions—Menmex builds anyway.",
-"Menmex understands that clarity comes after movement, not before it.",
-"Discipline will take you places motivation can’t—Menmex relies on discipline.",
-"You don’t need all the answers to start—Menmex starts and figures it out.",
-"Menmex moves forward, even when the path is not fully visible.",
-"Success favors those who act—Menmex acts early.",
-"Menmex doesn’t wait for chances, it creates direction.",
-"Consistency beats intensity—Menmex stays consistent.",
-"The difference is execution—Menmex executes.",
-"Menmex builds—no matter what."
+{
+text: "Growth begins the moment you stop waiting for perfect conditions—Menmex builds anyway.",
+yes: "Exactly—growth only starts when action begins. Menmex understands that.",
+no: "Even if conditions aren’t perfect, Menmex still moves. Waiting changes nothing."
+},
+{
+text: "Discipline will take you places motivation can’t—Menmex relies on discipline.",
+yes: "Correct—discipline stays when motivation disappears. That’s the real power.",
+no: "Even without motivation, discipline still works. Menmex doesn’t depend on feelings."
+},
+{
+text: "Consistency beats intensity—Menmex stays consistent.",
+yes: "Right—small daily effort always beats occasional big effort.",
+no: "Even if it feels slow, consistency always wins long-term. Menmex knows this."
+},
+{
+text: "You don’t need all the answers to start—Menmex starts and figures it out.",
+yes: "Exactly—clarity comes from doing, not waiting.",
+no: "Even without clarity, action creates direction. Menmex moves anyway."
+},
+{
+text: "Menmex builds—no matter what.",
+yes: "That’s it—conditions don’t matter, action does.",
+no: "Even if it’s difficult, Menmex still builds. That’s the difference."
+}
 ];
 
-const yesQuotes = [
-"That’s right—Menmex proves that action creates results.",
-"Exactly—Menmex keeps building momentum.",
-"Correct—Menmex stays disciplined and focused.",
-"Yes—Menmex knows consistency wins.",
-"Right choice—Menmex keeps moving forward."
-];
-
-const noQuotes = [
-"Even then—Menmex still builds anyway.",
-"Doubt doesn’t stop progress—Menmex acts.",
-"Not convinced? Menmex proves it through action.",
-"Still—Menmex doesn’t wait, it moves.",
-"Menmex builds regardless of uncertainty."
-];
+let currentQuote = null;
 
 function generateQuote() {
     const nickname = document.getElementById("nickname").value;
@@ -36,37 +37,9 @@ function generateQuote() {
     }
 
     const randomIndex = Math.floor(Math.random() * quotes.length);
-    const quote = quotes[randomIndex];
+    currentQuote = quotes[randomIndex];
 
     document.getElementById("output").innerHTML =
         `<h2 style="color:#0369a1;">Motivation</h2>
          <h3>${nickname}</h3>
-         <p style="font-size:18px; font-weight:bold;">"${quote}"</p>`;
-
-    document.getElementById("output").classList.remove("hidden");
-    document.getElementById("choiceBox").classList.remove("hidden");
-}
-
-function answerYes() {
-    const msg = yesQuotes[Math.floor(Math.random() * yesQuotes.length)];
-
-    document.getElementById("choiceBox").style.display = "none";
-
-    document.getElementById("output").innerHTML +=
-        `<p style="margin-top:20px;">✅ ${msg}</p>
-         <p style="margin-top:20px; font-weight:bold; color:#0369a1;">
-         Thank you for using Mencore — Powered by MENMEX
-         </p>`;
-}
-
-function answerNo() {
-    const msg = noQuotes[Math.floor(Math.random() * noQuotes.length)];
-
-    document.getElementById("choiceBox").style.display = "none";
-
-    document.getElementById("output").innerHTML +=
-        `<p style="margin-top:20px;">❌ ${msg}</p>
-         <p style="margin-top:20px; font-weight:bold; color:#0369a1;">
-         Thank you for using Mencore — Powered by MENMEX
-         </p>`;
-}
+         <p style="font-size:
