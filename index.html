@@ -3,30 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mencore</title>
+<title>Mencore Anonymous</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
     <h1>Welcome to Mencore</h1>
-    <p>Powered by MENMEX</p>
+    <p>Anonymous Messages — Powered by MENMEX</p>
 </header>
 
 <div class="card">
-    <input type="text" id="name" placeholder="Your Name">
-    <input type="text" id="nickname" placeholder="Nickname">
-    <input type="text" id="school" placeholder="School">
-
-    <button onclick="generateQuote()">Initiate</button>
+    <h2>Send Anonymous Message</h2>
+    <textarea id="message" placeholder="Type your message..." rows="4"></textarea>
+    <button onclick="sendMessage()">Send</button>
 </div>
 
-<div id="output" class="card hidden"></div>
-
-<div id="choiceBox" class="card hidden">
-    <p>Do you agree?</p>
-    <button onclick="answerYes()">Yes</button>
-    <button onclick="answerNo()">No</button>
+<div class="card">
+    <h2>Messages</h2>
+    <div id="messages"></div>
 </div>
 
 <script src="script.js"></script>
