@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mencore</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Welcome to Mencore</h1>
+    <p>Powered by MENMEX</p>
+</header>
+
+<div class="card">
+    <input type="text" id="name" placeholder="Your Name">
+    <input type="text" id="nickname" placeholder="Nickname">
+    <input type="text" id="school" placeholder="School">
+
+    <button onclick="generateQuote()">Generate</button>
+</div>
+
+<div id="output" class="card hidden"></div>
+
+<div id="choiceBox" class="card hidden">
+    <p>Do you agree?</p>
+    <button onclick="answerYes()">Yes</button>
+    <button onclick="answerNo()">No</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
