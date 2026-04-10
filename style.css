@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0ea5e9, #e0f2fe);
+    color: #0f172a;
+    text-align: center;
+    margin: 0;
+}
+
+/* HEADER */
+header {
+    padding: 30px;
+    background: linear-gradient(135deg, #0ea5e9, #0369a1);
+    color: white;
+}
+
+header p {
+    color: #facc15;
+    font-weight: bold;
+}
+
+/* CARD */
+.card {
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+/* INPUT */
+input {
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    width: 85%;
+    border-radius: 10px;
+    border: 2px solid #0ea5e9;
+}
+
+/* BUTTON */
+button {
+    margin: 10px;
+    padding: 12px 25px;
+    border: none;
+    background: #facc15;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
