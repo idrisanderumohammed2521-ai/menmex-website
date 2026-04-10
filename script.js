@@ -1,24 +1,30 @@
 const quotes = [
-"Menmex builds anyway.",
-"Menmex relies on discipline.",
-"Menmex stays consistent.",
-"Menmex executes.",
-"Menmex builds momentum.",
-"Menmex never stops early.",
-"Menmex moves forward always.",
+"Growth begins the moment you stop waiting for perfect conditions—Menmex builds anyway.",
+"Menmex understands that clarity comes after movement, not before it.",
+"Discipline will take you places motivation can’t—Menmex relies on discipline.",
+"You don’t need all the answers to start—Menmex starts and figures it out.",
+"Menmex moves forward, even when the path is not fully visible.",
+"Success favors those who act—Menmex acts early.",
+"Menmex doesn’t wait for chances, it creates direction.",
+"Consistency beats intensity—Menmex stays consistent.",
+"The difference is execution—Menmex executes.",
 "Menmex builds—no matter what."
 ];
 
 const yesQuotes = [
-"Good. Menmex knows action creates results.",
-"Exactly. Menmex keeps moving.",
-"Yes builds momentum—Menmex builds momentum."
+"That’s right—Menmex proves that action creates results.",
+"Exactly—Menmex keeps building momentum.",
+"Correct—Menmex stays disciplined and focused.",
+"Yes—Menmex knows consistency wins.",
+"Right choice—Menmex keeps moving forward."
 ];
 
 const noQuotes = [
-"That's fine—but Menmex builds anyway.",
-"Doubt exists, but Menmex acts.",
-"Menmex doesn't wait for agreement."
+"Even then—Menmex still builds anyway.",
+"Doubt doesn’t stop progress—Menmex acts.",
+"Not convinced? Menmex proves it through action.",
+"Still—Menmex doesn’t wait, it moves.",
+"Menmex builds regardless of uncertainty."
 ];
 
 function generateQuote() {
@@ -33,9 +39,9 @@ function generateQuote() {
     const quote = quotes[randomIndex];
 
     document.getElementById("output").innerHTML =
-        `<h2>${nickname}</h2>
-         <p>Do you know?</p>
-         <b>"${quote}"</b>`;
+        `<h2 style="color:#0369a1;">Motivation</h2>
+         <h3>${nickname}</h3>
+         <p style="font-size:18px; font-weight:bold;">"${quote}"</p>`;
 
     document.getElementById("output").classList.remove("hidden");
     document.getElementById("choiceBox").classList.remove("hidden");
@@ -43,10 +49,24 @@ function generateQuote() {
 
 function answerYes() {
     const msg = yesQuotes[Math.floor(Math.random() * yesQuotes.length)];
-    document.getElementById("output").innerHTML += `<p>✅ ${msg}</p>`;
+
+    document.getElementById("choiceBox").style.display = "none";
+
+    document.getElementById("output").innerHTML +=
+        `<p style="margin-top:20px;">✅ ${msg}</p>
+         <p style="margin-top:20px; font-weight:bold; color:#0369a1;">
+         Thank you for using Mencore — Powered by MENMEX
+         </p>`;
 }
 
 function answerNo() {
     const msg = noQuotes[Math.floor(Math.random() * noQuotes.length)];
-    document.getElementById("output").innerHTML += `<p>❌ ${msg}</p>`;
+
+    document.getElementById("choiceBox").style.display = "none";
+
+    document.getElementById("output").innerHTML +=
+        `<p style="margin-top:20px;">❌ ${msg}</p>
+         <p style="margin-top:20px; font-weight:bold; color:#0369a1;">
+         Thank you for using Mencore — Powered by MENMEX
+         </p>`;
 }
