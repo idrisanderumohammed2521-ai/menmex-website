@@ -1,97 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Mencore</title>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 
-  <style>
-    body {
-      font-family: Arial;
-      background: linear-gradient(135deg, skyblue, white, gold);
-      text-align: center;
-      padding: 20px;
-    }
+const firebaseConfig = {
+  apiKey: "AIzaSyByqrWIVXVe4JnW0h1l_UzJzJQYlDXUU4I",
+  authDomain: "mencore.firebaseapp.com",
+  projectId: "mencore",
+  storageBucket: "mencore.firebasestorage.app",
+  messagingSenderId: "223090622351",
+  appId: "1:223090622351:web:7ca7a578599344c265d5fa"
+};
 
-    h1 {
-      color: gold;
-    }
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    input, textarea {
-      width: 90%;
-      padding: 10px;
-      margin: 10px;
-      border-radius: 10px;
-      border: none;
-    }
+// 🔥 GET USER ID FROM LINK
+const params = new URLSearchParams(window.location.search);
+const userId = params.get("id") || "default";
 
-    button {
-      padding: 12px 20px;
-      border: none;
-      border-radius: 10px;
-      background: gold;
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-    }
+// SEND MESSAGE
+window.sendMessage = async function () {
+  const name = document.getElementById("name").value;
+  const message = document.getElementById("message").value;
 
-    #success {
-      display: none;
-      color: green;
-      font-weight: bold;
-    }
-  </style>
-</head>
+  if (message === "") {
+    alert("Write something!");
+    return;
+  }
 
-<body>
+  await addDoc(collection(db, "messages", userId, "inbox"), {
+    name: name || "Anonymous",
+    message: message,
+    time: new Date()
+  });
 
-  <h1>Welcome to Mencore</h1>
-  <h3>Powered by MENMEX</h3>
-
-  <p>Send anonymous message 👇</p>
-
-  <input type="text" id="name" placeholder="Your name (optional)">
-  <textarea id="message" placeholder="Type your message..."></textarea>
-
-  <button onclick="sendMessage()">Send</button>
-
-  <p id="success">Message sent successfully ✅</p>
-
-  <!-- Firebase -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyByqrWIVXVe4JnW0h1l_UzJzJQYlDXUU4I",
-      authDomain: "mencore.firebaseapp.com",
-      projectId: "mencore",
-      storageBucket: "mencore.firebasestorage.app",
-      messagingSenderId: "223090622351",
-      appId: "1:223090622351:web:7ca7a578599344c265d5fa"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    window.sendMessage = async function () {
-      const name = document.getElementById("name").value;
-      const message = document.getElementById("message").value;
-
-      if (message === "") {
-        alert("Write something!");
-        return;
-      }
-
-      await addDoc(collection(db, "messages"), {
-        name: name || "Anonymous",
-        message: message,
-        time: new Date()
-      });
-
-      document.getElementById("success").style.display = "block";
-      document.getElementById("name").value = "";
-      document.getElementById("message").value = "";
-    };
-  </script>
-
-</body>
-</html>
+  document.getElementById("success").style.display = "block";
+  document.getElementById("name").value = "";
+  document.getElementById("message").value = "";
+};
+</script>
