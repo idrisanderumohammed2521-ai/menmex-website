@@ -1,3 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MENMEX Admin</title>
+  <style>
+    body {
+      background: linear-gradient(to right, skyblue, white, gold);
+      font-family: Arial;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #loginBox, #dashboard {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      margin: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: gold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .msg {
+      background: #f1f1f1;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>MENCORE ADMIN</h1>
+
+<div id="loginBox">
+  <input type="password" id="password" placeholder="Enter password"><br>
+  <input type="text" id="userid" placeholder="Enter your ID (e.g menmex)"><br>
+  <button onclick="login()">Login</button>
+</div>
+
+<div id="dashboard" style="display:none;">
+  <h3>Your Messages</h3>
+  <div id="messages"></div>
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
@@ -14,24 +74,42 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 🔥 ENTER YOUR USER ID HERE
-const userId = "menmex";
+// 🔐 CHANGE PASSWORD HERE
+const ADMIN_PASSWORD = "menmex123";
+
+let currentUser = "";
+
+window.login = async function () {
+  const pass = document.getElementById("password").value;
+  const user = document.getElementById("userid").value;
+
+  if (pass === ADMIN_PASSWORD && user) {
+    currentUser = user;
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+    loadMessages();
+  } else {
+    alert("Wrong details ❌");
+  }
+};
 
 async function loadMessages() {
-  const querySnapshot = await getDocs(collection(db, "messages", userId, "inbox"));
-  const container = document.getElementById("messages");
+  const querySnapshot = await getDocs(collection(db, "messages", currentUser, "inbox"));
 
-  querySnapshot.forEach((doc) => {
+  const container = document.getElementById("messages");
+  container.innerHTML = "";
+
+  querySnapshot.forEach(doc => {
     const data = doc.data();
 
     container.innerHTML += `
       <div class="msg">
-        <div class="name">${data.name}</div>
-        <div>${data.message}</div>
+        ${data.message}
       </div>
     `;
   });
 }
-
-loadMessages();
 </script>
+
+</body>
+</html>
