@@ -41,8 +41,17 @@ button {
     margin: 10px;
     padding: 12px 25px;
     border: none;
-    background: #facc15;
+    background: linear-gradient(135deg, #facc15, #eab308);
     border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* HIDDEN */
+.hidden {
+    display: none;
 }
