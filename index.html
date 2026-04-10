@@ -1,30 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mencore Anonymous</title>
-<link rel="stylesheet" href="style.css">
+  <title>Mencore</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(135deg, skyblue, white, gold);
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: gold;
+    }
+
+    input, textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      background: gold;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #success {
+      display: none;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-    <h1>Welcome to Mencore</h1>
-    <p>Anonymous Messages — Powered by MENMEX</p>
-</header>
+  <h1>Welcome to Mencore</h1>
+  <h3>Powered by MENMEX</h3>
 
-<div class="card">
-    <h2>Send Anonymous Message</h2>
-    <textarea id="message" placeholder="Type your message..." rows="4"></textarea>
-    <button onclick="sendMessage()">Send</button>
-</div>
+  <p>Send anonymous message 👇</p>
 
-<div class="card">
-    <h2>Messages</h2>
-    <div id="messages"></div>
-</div>
+  <input type="text" id="name" placeholder="Your name (optional)">
+  <textarea id="message" placeholder="Type your message..."></textarea>
 
-<script src="script.js"></script>
+  <button onclick="sendMessage()">Send</button>
+
+  <p id="success">Message sent successfully ✅</p>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyByqrWIVXVe4JnW0h1l_UzJzJQYlDXUU4I",
+      authDomain: "mencore.firebaseapp.com",
+      projectId: "mencore",
+      storageBucket: "mencore.firebasestorage.app",
+      messagingSenderId: "223090622351",
+      appId: "1:223090622351:web:7ca7a578599344c265d5fa"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.sendMessage = async function () {
+      const name = document.getElementById("name").value;
+      const message = document.getElementById("message").value;
+
+      if (message === "") {
+        alert("Write something!");
+        return;
+      }
+
+      await addDoc(collection(db, "messages"), {
+        name: name || "Anonymous",
+        message: message,
+        time: new Date()
+      });
+
+      document.getElementById("success").style.display = "block";
+      document.getElementById("name").value = "";
+      document.getElementById("message").value = "";
+    };
+  </script>
 
 </body>
 </html>
